@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Login Details</title>
+</head>
+<body>
+
+    <h2>Enter Mobile Number</h2>
+    <input type="text" id="mobile" placeholder="Enter Mobile No">
+    <button onclick="fetchData()">Get Details</button>
+    
+    <p id="result"></p>
+
+    <script>
+        function fetchData() {
+            var mobile = document.getElementById("mobile").value;
+            var url = "YOUR_DEPLOYED_WEB_APP_URL?mobile=" + mobile;
+
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.username && data.password) {
+                    document.getElementById("result").innerHTML = 
+                        "Username: " + data.username + "<br>Password: " + data.password;
+                } else {
+                    document.getElementById("result").innerHTML = "No Data Found!";
+                }
+            })
+            .catch(error => console.error("Error fetching data:", error));
+        }
+    </script>
+
+</body>
+</html>
